@@ -23,6 +23,7 @@ class PostAdmin(admin.ModelAdmin):
     ]
 
 
+admin.site.site_header = "Hulahoo"  # отвечает за изменение текста главного поля в админской панели
 admin.site.register(Category)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment)

@@ -4,3 +4,4 @@ wheel
 Pillow
 django-filter
 djangorestframework
+django-material-admin
