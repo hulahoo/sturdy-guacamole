@@ -30,7 +30,7 @@ SECRET_KEY = 'ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v'
 DEBUG = True
     # config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://aqueous-plateau-10138.herokuapp.com/', 'localhost', '127.0.0.1']
 
 
 # Application definition
