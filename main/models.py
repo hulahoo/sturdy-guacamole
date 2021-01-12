@@ -60,6 +60,7 @@ class Comment(models.Model):
     comment = models.TextField(blank=True)
     email = models.EmailField()
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
+    is_true = models.BooleanField(default=False)
 
     def __str__(self):
         return self.comment

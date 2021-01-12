@@ -8,10 +8,6 @@ from main.models import Post, Category, Comment, PostVideo, Video
 from main.serializers import PostDetailSerializer, CategorySerializer, CommentSerializer, PostVideoSerializer, VideoSerializer
 
 
-class VideoViewSet(ModelViewSet):
-    queryset = Video.objects.all()
-    serializer_class = VideoSerializer
-    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 
 class PostViewSet(ModelViewSet):
@@ -21,6 +17,20 @@ class PostViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['category', 'title_post']
     search_fields = ['category', 'title_post']
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
+
+    def retrieve(self, request, pk):
+        if request.method == 'GET':
+            queryset = self.filter_queryset((self.get_queryset()))
+            obj = self.get_object()
+            obj.views += 1
+            obj.save(update_fields=("views",))
+        return super().retrieve(request)
+
+
+class VideoViewSet(ModelViewSet):
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 

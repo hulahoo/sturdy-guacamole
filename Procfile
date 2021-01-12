@@ -1,0 +1,1 @@
+web: gunicorn sturdy_guacamole.wsgi

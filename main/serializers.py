@@ -32,7 +32,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Comment
-        fields = ('full_name', 'comment', 'email')
+        fields = ('id', 'full_name', 'comment', 'email', 'post_id')
 
 
 class CommentDetailSerializer(serializers.ModelSerializer):
@@ -40,7 +40,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Comment
-        fields = ('full_name', 'comment', 'email', 'post_id')
+        fields = ('full_name', 'comment', 'email', 'is_true', 'post_id')
 
 
 class PostImageSerializer(serializers.ModelSerializer):
@@ -68,11 +68,12 @@ class PostVideoSerializer(serializers.ModelSerializer):
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
+    # comments = CommentSerializer(many=True, read_only=True)
     """Создание деталей постов"""
     class Meta:
         """Определение полей"""
         model = Post
-        fields = ('id', 'title_post', 'description', 'category', 'post_video', 'created')
+        fields = ('id', 'title_post', 'description', 'category', 'post_video', 'created', 'views')
 
 
     def _get_image_url(self, obj):
@@ -92,8 +93,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)  # здесь мы вызываем родительский метод
         representation['category'] = CategorySerializer(instance.category.all(), many=True).data  # здесь мы выводим все категории, many=TRue для большого количества постов
         representation['post_image'] = self._get_image_url(instance)  # instance это обькет класса который мы прогоняем через serializer в нашем случаем это obj
-        print(instance.post_video)
         representation['post_video'] = PostVideoSerializer(instance.post_video.all(), many=True).data
-        if "post_id" not in self.fields:
-            representation['comments'] = CommentSerializer(instance.comment.all(), many=True).data
+        print(instance.comment.all())
+        if instance.comment is not None:
+            representation['comments'] = CommentSerializer(instance.comment.filter(is_true = True), many=True).data
         return representation

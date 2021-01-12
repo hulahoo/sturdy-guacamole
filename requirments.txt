@@ -5,3 +5,7 @@ Pillow
 django-filter
 djangorestframework
 django-material-admin
+gunicorn
+python-decouple
+dj-database-url
+whitenoise

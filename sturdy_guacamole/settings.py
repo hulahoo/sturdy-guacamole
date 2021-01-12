@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
@@ -140,7 +142,7 @@ MATERIAL_ADMIN_SITE = {
     'HEADER': 'NurPressAdminPanel',  # Admin site header
     'TITLE': 'Hulahoo',  # Admin site title
     'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
-    'MAIN_BG_COLOR':  'green',  # Admin site main color, css color should be specified
+    'MAIN_BG_COLOR':  'black',  # Admin site main color, css color should be specified
     'MAIN_HOVER_COLOR':  'black',  # Admin site main hover color, css color should be specified
     'PROFILE_PICTURE':  'admin/img/pexels-eberhard-grossgasteiger-1367192.jpg',  # Admin site profile picture (path to static should be specified)
     'PROFILE_BG':  'admin/img/pexels-eberhard-grossgasteiger-1367192.jpg',  # Admin site profile background (path to static should be specified)
@@ -168,4 +170,3 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
