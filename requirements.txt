@@ -9,3 +9,4 @@ gunicorn
 python-decouple
 dj-database-url
 whitenoise
+django-heroku == 0.3.1
