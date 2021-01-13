@@ -14,8 +14,7 @@ from pathlib import Path
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import decouple
-import config
+from decouple import config
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 
 
