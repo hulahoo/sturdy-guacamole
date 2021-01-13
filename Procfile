@@ -1,4 +1,5 @@
 web: gunicorn sturdy_guacamole.wsgi
+
 Django = "3.1"
 psycopg2-binary = "2.8.6"
 Pillow = "8.1.0"
