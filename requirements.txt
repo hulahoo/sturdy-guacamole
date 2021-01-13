@@ -1,12 +1,35 @@
 Django == 3.1
 psycopg2-binary == 2.8.6
-wheel
-Pillow
-django-filter
-djangorestframework
+wheel~=0.35.1
+Pillow~=8.0.1
+django-filter~=2.4.0
+djangorestframework~=3.12.2
 django-material-admin
 gunicorn
-python-decouple
+python-decouple == 3.1
 dj-database-url
 whitenoise
 django-heroku == 0.3.1
+
+future~=0.18.2
+numpy~=1.19.2
+olefile~=0.46
+pip~=20.2.4
+keyring~=18.0.1
+pytz~=2019.3
+sqlparse~=0.4.1
+asgiref~=3.2.10
+config~=0.5.0.post0
+PyYAML~=5.3.1
+Jinja2~=2.11.2
+docutils~=0.16
+setproctitle~=1.1.10
+setuptools~=50.3.0
+dj-config-url~=0.1.1
+coreapi~=2.3.3
+coreschema~=0.0.4
+uritemplate~=3.0.1
+google-api-python-client~=1.7.11
+requests~=2.22.0
+Pygments~=2.7.2
+decouple~=0.0.7
