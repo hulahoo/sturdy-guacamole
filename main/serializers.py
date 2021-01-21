@@ -16,7 +16,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Category
-        fields = ('title_category', )
+        fields = ('id', 'title_category')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -56,7 +56,7 @@ class PostTagSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей"""
         model = PostTag
-        fields = ('title', )
+        fields = ('title_tag', )
 
 
 class PostVideoSerializer(serializers.ModelSerializer):
@@ -73,7 +73,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей"""
         model = Post
-        fields = ('id', 'title_post', 'description', 'category', 'post_video', 'created', 'views')
+        fields = ('id', 'title_post', 'description', 'category', 'post_video', 'created', 'views', 'tags')
 
 
     def _get_image_url(self, obj):
@@ -94,6 +94,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
         representation['category'] = CategorySerializer(instance.category.all(), many=True).data  # здесь мы выводим все категории, many=TRue для большого количества постов
         representation['post_image'] = self._get_image_url(instance)  # instance это обькет класса который мы прогоняем через serializer в нашем случаем это obj
         representation['post_video'] = PostVideoSerializer(instance.post_video.all(), many=True).data
+        representation['post_tag'] = PostTagSerializer(instance.tags.all(), many=True).data
         print(instance.comment.all())
         if instance.comment is not None:
             representation['comments'] = CommentSerializer(instance.comment.filter(is_true = True), many=True).data

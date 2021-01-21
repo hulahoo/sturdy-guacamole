@@ -24,8 +24,10 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config('SECRET_KEY_VALUE')
 # ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ['aqueous-plateau-10138.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -85,9 +87,11 @@ WSGI_APPLICATION = 'sturdy_guacamole.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-            default=config('DATABASE_URL')
-        )
+        default=config('DATABASE_URL')
+    )
+
 }
+
 
 # 'default': {
 #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -103,6 +107,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
 }
 
 
