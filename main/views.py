@@ -4,19 +4,19 @@ from rest_framework import filters
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 from rest_framework.viewsets import ModelViewSet
 
-from main.models import Post, Category, Comment, PostVideo, Video
-from main.serializers import PostDetailSerializer, CategorySerializer, CommentSerializer, PostVideoSerializer, VideoSerializer
-
-
+from main.models import Post, Category, Comment, PostVideo, Video, PostTag
+from main.search import CustomSearchFilter, CategorySearchFilter
+from main.serializers import PostDetailSerializer, CategorySerializer, CommentSerializer, PostVideoSerializer, \
+    VideoSerializer, PostTagSerializer
 
 
 class PostViewSet(ModelViewSet):
     """Создание предтставления"""
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['category', 'title_post']
-    search_fields = ['category', 'title_post']
+    filter_backends = [DjangoFilterBackend, CustomSearchFilter]
+    filterset_fields = ['title_post', 'category', 'tags']
+    search_fields = ['title_post', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
     def retrieve(self, request, pk):
@@ -37,7 +37,7 @@ class VideoViewSet(ModelViewSet):
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filter_backends = [DjangoFilterBackend, CategorySearchFilter]
     filteset_fields = ['title_category', ]
     search_fields = ['title_category', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
@@ -56,4 +56,10 @@ class PostVideoViewSet(ModelViewSet):
     queryset = PostVideo.objects.all()
     serializer_class = PostVideoSerializer
     print("Successfully!")
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
+
+
+class PostTagViewSet(ModelViewSet):
+    queryset = PostTag.objects.all()
+    serializer_class = PostTagSerializer
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]

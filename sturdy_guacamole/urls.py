@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from main.views import PostViewSet, CategoryViewSet, CommentViewSet, PostVideoViewSet, VideoViewSet
+from main.views import PostViewSet, CategoryViewSet, CommentViewSet, PostVideoViewSet, VideoViewSet, PostTagViewSet
 
 router = DefaultRouter()
 router.register('category', CategoryViewSet)
@@ -12,6 +12,7 @@ router.register('posts', PostViewSet)
 router.register('comments', CommentViewSet)
 router.register('post_video', PostVideoViewSet)
 router.register('main_video', VideoViewSet)
+router.register('post_tag', PostTagViewSet)
 
 
 urlpatterns = [

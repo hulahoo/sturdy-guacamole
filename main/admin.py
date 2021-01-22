@@ -7,14 +7,16 @@ class ImageInline(admin.TabularInline):
     model = PostImage
     extra = 1
 
+#
+# class TagInline(admin.TabularInline):
+#     model = PostTag
+#     extra = 1
+
+
 
 class VideoInline(admin.TabularInline):
     model = PostVideo
     extra = 1
-
-
-# class TagInline(admin.TabularInline):
-#     model = PostTag
 
 
 class PostAdmin(admin.ModelAdmin):

@@ -22,12 +22,11 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY_VALUE')
-# ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v
+SECRET_KEY = "ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v"
 
+# config('SECRET_KEY_VALUE')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
-
 
 ALLOWED_HOSTS = ['aqueous-plateau-10138.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -86,12 +85,13 @@ WSGI_APPLICATION = 'sturdy_guacamole.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
 
-}
 
+}
 
 # 'default': {
 #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
