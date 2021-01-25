@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
 from pathlib import Path
+from django.conf import settings
 import dj_database_url
-
+from rest_framework.settings import api_settings
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from decouple import config
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
@@ -22,11 +23,12 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v"
+SECRET_KEY = config('SECRET_KEY_VALUE')
 
-# config('SECRET_KEY_VALUE')
+# "ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ['aqueous-plateau-10138.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -83,32 +85,32 @@ WSGI_APPLICATION = 'sturdy_guacamole.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
 DATABASES = {
 
     'default': dj_database_url.config(
         default=config('DATABASE_URL')
     )
 
-
 }
 
-# 'default': {
-#     'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#     'NAME': 'sturdy_guacamole',
-#     'USER': 'tof',
-#     'PASSWORD': '1',
-#     'HOST': '127.0.0.1',
-#     'PORT': '5432',
-# }
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'sturdy_guacamole',
+#         'USER': 'tof',
+#         'PASSWORD': '1',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
 
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+
+    'DEFAULT_PAGINATION_CLASS': 'main.pagination.CustomPagination',
     'PAGE_SIZE': 10
+
 }
 
 
