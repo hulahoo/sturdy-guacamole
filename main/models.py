@@ -39,7 +39,7 @@ class PostTag(models.Model):
 class PostImage(models.Model):
     """Создание модели картинок имеет связь с постом"""
     is_main = models.BooleanField(default=False)
-    image = models.ImageField(upload_to='posts', null=True, blank=True)
+    image = models.URLField(max_length=255, blank=True)
     post_image = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='image_post', default='')
 
 
