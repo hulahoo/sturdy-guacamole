@@ -32,7 +32,7 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Comment
-        fields = ('id', 'full_name', 'comment', 'email', 'post_id')
+        fields = ('id', 'full_name', 'comment', 'post_id')
 
 
 class CommentDetailSerializer(serializers.ModelSerializer):
@@ -40,7 +40,7 @@ class CommentDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Comment
-        fields = ('full_name', 'comment', 'email', 'is_true', 'post_id')
+        fields = ('full_name', 'comment', 'is_true', 'post_id')
 
 
 class PostImageSerializer(serializers.ModelSerializer):

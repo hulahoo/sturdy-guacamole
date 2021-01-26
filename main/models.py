@@ -58,7 +58,6 @@ class Comment(models.Model):
     """Создание модели коментариев имеет связь с Постом"""
     full_name = models.CharField(max_length=50, blank=True)
     comment = models.TextField(blank=True)
-    email = models.EmailField()
     post_id = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comment')
     is_true = models.BooleanField(default=False)
 
