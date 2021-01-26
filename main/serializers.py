@@ -66,10 +66,12 @@ class PostVideoSerializer(serializers.ModelSerializer):
         model = PostVideo
         fields = ('url', )
 
+
 class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = PostImage
         fields = ('image', )
+
 
 class PostDetailSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(many=True, read_only=True)
