@@ -1,6 +1,12 @@
 """Создаем сериализатор для моделей"""
 from rest_framework import serializers
-from main.models import Post, Category, Comment, PostImage, PostTag, PostVideo, Video
+from main.models import Post, Category, Comment, PostImage, PostTag, PostVideo, Video, ImageAd
+
+
+class ImageAdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageAd
+        fields = ('image_ad', )
 
 
 class VideoSerializer(serializers.ModelSerializer):

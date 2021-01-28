@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+
     'rest_framework',
     'django_filters',
+    'ckeditor',
+    'ckeditor_uploader',
+
 
     'main',
 ]
@@ -109,7 +113,7 @@ REST_FRAMEWORK = {
     ),
 
     'DEFAULT_PAGINATION_CLASS': 'main.pagination.CustomPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 30
 
 }
 
@@ -181,6 +185,6 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+CKEDITOR_UPLOAD_PATH = 'uploads/'

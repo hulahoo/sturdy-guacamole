@@ -4,10 +4,10 @@ from rest_framework import filters
 from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly, AllowAny
 from rest_framework.viewsets import ModelViewSet
 
-from main.models import Post, Category, Comment, PostVideo, Video, PostTag
+from main.models import Post, Category, Comment, PostVideo, Video, PostTag, ImageAd
 from main.search import CustomSearchFilter, CategorySearchFilter
 from main.serializers import PostDetailSerializer, CategorySerializer, CommentSerializer, PostVideoSerializer, \
-    VideoSerializer, PostTagSerializer
+    VideoSerializer, PostTagSerializer, ImageAdSerializer
 
 
 class PostViewSet(ModelViewSet):
@@ -17,7 +17,7 @@ class PostViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, CustomSearchFilter]
     filterset_fields = ['title_post', 'category', 'tags']
     search_fields = ['title_post', ]
-    permission_classes = [AllowAny, ]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
     def retrieve(self, request, pk):
         if request.method == 'GET':
@@ -31,7 +31,7 @@ class PostViewSet(ModelViewSet):
 class VideoViewSet(ModelViewSet):
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 
 class CategoryViewSet(ModelViewSet):
@@ -40,7 +40,7 @@ class CategoryViewSet(ModelViewSet):
     filter_backends = [DjangoFilterBackend, CategorySearchFilter]
     filteset_fields = ['title_category', ]
     search_fields = ['title_category', ]
-    permission_classes = [AllowAny, ]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 
 class CommentViewSet(ModelViewSet):
@@ -56,10 +56,16 @@ class PostVideoViewSet(ModelViewSet):
     queryset = PostVideo.objects.all()
     serializer_class = PostVideoSerializer
     print("Successfully!")
-    permission_classes = [AllowAny, ]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 
 class PostTagViewSet(ModelViewSet):
     queryset = PostTag.objects.all()
     serializer_class = PostTagSerializer
-    permission_classes = [AllowAny, ]
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
+
+
+class ImageAdViewSet(ModelViewSet):
+    queryset = ImageAd.objects.all()
+    serializer_class = ImageAdSerializer
+    permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]

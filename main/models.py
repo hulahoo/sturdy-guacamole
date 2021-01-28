@@ -13,7 +13,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     """Создание модели постов с м2м связью с категорией"""
-    title_post = models.CharField(max_length=100)
+    title_post = models.TextField()
     description = models.TextField()
     is_main = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
@@ -71,3 +71,7 @@ class Video(models.Model):
 
     def __str__(self):
         return self.url
+
+
+class ImageAd(models.Model):
+    image_ad = models.URLField(max_length=255, blank=True)
