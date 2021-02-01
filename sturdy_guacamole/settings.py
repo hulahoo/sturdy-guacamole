@@ -48,8 +48,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'django_filters',
-    'ckeditor',
-    'ckeditor_uploader',
 
 
     'main',
@@ -176,7 +174,6 @@ MATERIAL_ADMIN_SITE = {
     }
 }
 
-GDAL_LIBRARY_PATH = '/app/.heroku/vendor/lib/libgdal.so' if os.environ.get('ENV') == 'HEROKU' else os.getenv('GDAL_LIBRARY_PATH')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

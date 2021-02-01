@@ -1,15 +1,7 @@
 from django.contrib import admin
 from django.contrib.gis import forms
-from ckeditor_uploader.widgets import CKEditorUploadingWidget
 from main.models import Category, Post, Comment, PostVideo, Video, PostTag, PostImage, ImageAd
 
-
-class NewAdminForm(forms.ModelForm):
-    title_post = forms.CharField(widget=CKEditorUploadingWidget())
-    decription = forms.CharField(widget=CKEditorUploadingWidget())
-    class Meta:
-        model = Post
-        fields = '__all__'
 
 
 class ImageInline(admin.TabularInline):
@@ -23,7 +15,6 @@ class VideoInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    form = NewAdminForm
     inlines = [
         ImageInline, VideoInline
     ]
