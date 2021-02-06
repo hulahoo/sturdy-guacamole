@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.gis import forms
 from main.models import Category, Post, Comment, PostVideo, Video, PostTag, PostImage, ImageAd
 
 
