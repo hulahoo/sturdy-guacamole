@@ -176,11 +176,11 @@ MATERIAL_ADMIN_SITE = {
 }
 
 CORS_ORIGIN_ALLOW = True
-CORS_ALLOW_CREDENTIALS = True
-CORS_ORIGIN_REGEX_WHITELIST = [
-    'https://aqueous-plateau-10138.herokuapp.com/',
-    'https://nurpress-test.web.app',
-]
+# CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_REGEX_WHITELIST = [
+#     'https://aqueous-plateau-10138.herokuapp.com/',
+#     'https://nurpress-test.web.app',
+# ]
 
 
 STATIC_URL = '/static/'
