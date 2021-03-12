@@ -22,7 +22,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Category
-        fields = ('id', 'title_category')
+        fields = ('id', 'title')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -30,7 +30,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Post
-        fields = ('id', 'title_post', 'description', 'category')
+        fields = ('id', 'title', 'description', 'category', 'language')
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -85,7 +85,7 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей"""
         model = Post
-        fields = ('id', 'title_post', 'description', 'category', 'post_video', 'created', 'views', 'tags')
+        fields = ('id', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
 
     #
     # def _get_image_url(self, obj):

@@ -15,8 +15,8 @@ class PostViewSet(ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
     filter_backends = [DjangoFilterBackend, CustomSearchFilter]
-    filterset_fields = ['title_post', 'category', 'tags']
-    search_fields = ['title_post', ]
+    filterset_fields = ['title', 'category', 'language']
+    search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
     def retrieve(self, request, pk):
@@ -38,8 +38,8 @@ class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend, CategorySearchFilter]
-    filteset_fields = ['title_category', ]
-    search_fields = ['title_category', ]
+    filteset_fields = ['title', ]
+    search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
 
 
