@@ -18,8 +18,9 @@ class PostViewSet(ModelViewSet):
     filterset_fields = ['title', 'category', 'language']
     search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
+    lookup_field = 'slug'
 
-    def retrieve(self, request, pk):
+    def retrieve(self, request, slug):
         if request.method == 'GET':
             queryset = self.filter_queryset((self.get_queryset()))
             obj = self.get_object()

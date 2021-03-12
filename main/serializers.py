@@ -30,7 +30,11 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Post
-        fields = ('id', 'title', 'description', 'category', 'language')
+        fields = ('url', 'slug', 'title', 'description', 'category', 'language')
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -85,9 +89,12 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей"""
         model = Post
-        fields = ('id', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
+        fields = ('url', 'slug', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
 
-    #
     # def _get_image_url(self, obj):
     #     """Мы получаем url первой картинки"""
     #     request = self.context.get('request')  # это у нас словарь и поэтому нужен метод get
