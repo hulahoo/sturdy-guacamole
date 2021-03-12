@@ -79,65 +79,6 @@ class ImageAd(models.Model):
 
 
 
-# class CategoryKG(models.Model):
-#     """Создание модели категории имеет только заголовок"""
-#     title = models.CharField(max_length=100, unique=True)
-#     slug = models.SlugField(max_length=50, null=True, blank=True)
-
-
-#     def __str__(self):
-#         return self.title
-
-
-# class PostKG(models.Model):
-#     """Создание модели постов с м2м связью с категорией"""
-#     title = models.TextField()
-#     slug = models.SlugField(max_length=50, null=True, blank=True)
-#     description = models.TextField()
-#     is_main = models.BooleanField(default=False)
-#     created = models.DateTimeField(auto_now_add=True)
-#     views = models.PositiveIntegerField(default=0)
-#     category = models.ManyToManyField(CategoryKG, related_name='post_category_kg')
-
-
-#     def __str__(self):
-#         return self.title
-
-
-# class PostTagKG(models.Model):
-#     """Создание модели тегов для постов"""
-#     title_tag = models.CharField(max_length=50)
-#     tag = models.ManyToManyField(PostKG, related_name='tags_kg', default='')
-
-#     def __str__(self):
-#         return self.title_tag
-
-# class PostImageKG(models.Model):
-#     """Создание модели картинок имеет связь с постом"""
-#     is_main = models.BooleanField(default=False)
-#     image = models.URLField(max_length=255, blank=True)
-#     post_image = models.ForeignKey(PostKG, on_delete=models.CASCADE, related_name='image_post_kg', default='')
-
-
-# class PostVideoKG(models.Model):
-#     """Создание модели видео для постов"""
-#     url = models.URLField(max_length=200)
-#     post_video = models.ForeignKey(PostKG, on_delete=models.CASCADE, related_name='post_video_kg', default='')
-
-
-#     def __str__(self):
-#         return self.url
-
-
-# class CommentKG(models.Model):
-#     """Создание модели коментариев имеет связь с Постом"""
-#     full_name = models.CharField(max_length=50, blank=True)
-#     comment = models.TextField(blank=True)
-#     post_id = models.ForeignKey(PostKG, on_delete=models.CASCADE, related_name='comment_kg')
-#     is_true = models.BooleanField(default=False)
-
-#     def __str__(self):
-#         return self.comment
 
 
 def slug_generator(sender, instance, *args, **kwargs):
@@ -148,5 +89,3 @@ def slug_generator(sender, instance, *args, **kwargs):
 
 pre_save.connect(slug_generator, sender=Category)
 pre_save.connect(slug_generator, sender=Post)
-# pre_save.connect(slug_generator, sender=CategoryKG)
-# pre_save.connect(slug_generator, sender=PostKG)

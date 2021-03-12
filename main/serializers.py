@@ -30,7 +30,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Post
-        fields = ('url', 'slug', 'title', 'description', 'category', 'language')
+        fields = ('id', 'url', 'slug', 'title', 'description', 'category', 'language')
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
@@ -87,9 +87,9 @@ class PostDetailSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(many=True, read_only=True)
     """Создание деталей постов"""
     class Meta:
-        """Определение полей"""
+        """Определение полей""" 
         model = Post
-        fields = ('url', 'slug', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
+        fields = ('id', 'url', 'slug', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
