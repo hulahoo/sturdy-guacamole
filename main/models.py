@@ -48,6 +48,8 @@ class PostImage(models.Model):
     image = models.URLField(max_length=255, blank=True)
     post_image = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='image_post', default='')
 
+    
+
 class PostVideo(models.Model):
     """Создание модели видео для постов"""
     url = models.URLField(max_length=200)
