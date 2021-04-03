@@ -5,20 +5,22 @@ from sturdy_guacamole.utils import unique_slug_generator # import from main fold
 from django_ckeditor_5.fields import CKEditor5Field
 
 
+LANGUAGE_CHOICES = (
+        ('RU', 'RU'),
+        ('KG', 'KG')
+    )
+
 class Category(models.Model):
     """Создание модели категории имеет только заголовок"""
     title = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=50, null=True, blank=True)
+    language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES)
 
 
     def __str__(self):
         return self.title
 
 class Post(models.Model):
-    LANGUAGE_CHOICES = (
-        ('RU', 'RU'),
-        ('KG', 'KG')
-    )
     """Создание модели постов с м2м связью с категорией"""
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, null=True, blank=True)

@@ -27,7 +27,8 @@ SECRET_KEY = 'kuba_aidai_one_love'
 
 # "ji5sx6f6r20#pv8@codb#=g=b5#+76rej^-#04_9@4k77&!u(v"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+# DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['aqueous-plateau-10138.herokuapp.com', 'localhost', '127.0.0.1']
@@ -89,12 +90,18 @@ WSGI_APPLICATION = 'sturdy_guacamole.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+# DATABASES = {
+
+#     'default': dj_database_url.config(
+#         default=config('DATABASE_URL')
+#     )
+
+# }
 DATABASES = {
-
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
-    )
-
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 #     'default': {

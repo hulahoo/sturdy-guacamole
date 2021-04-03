@@ -22,7 +22,12 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Category
-        fields = ('id', 'title')
+        fields = ('id', 'url', 'title', 'slug', 'language')
+        lookup_field = 'slug'
+        extra_kwargs = {
+            'url': {'lookup_field': 'slug'}
+        }
+
 
 
 class PostSerializer(serializers.ModelSerializer):
