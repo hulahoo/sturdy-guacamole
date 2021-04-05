@@ -2,7 +2,7 @@
 from django.db import models
 from django.db.models.signals import pre_save
 from sturdy_guacamole.utils import unique_slug_generator # import from main folder
-from django_ckeditor_5.fields import CKEditor5Field
+from ckeditor.fields import RichTextField
 
 
 LANGUAGE_CHOICES = (
@@ -25,7 +25,7 @@ class Post(models.Model):
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, null=True, blank=True)
     # description = models.TextField()
-    description = CKEditor5Field('Text', config_name='extends')
+    description = RichTextField('Text')
     language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES)
     is_main = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)

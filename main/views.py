@@ -39,7 +39,7 @@ class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend, CategorySearchFilter]
-    filteset_fields = ['title', 'language']
+    filterset_fields = ['title', 'language']
     search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
     lookup_field = 'slug'
