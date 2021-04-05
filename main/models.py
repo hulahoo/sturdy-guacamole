@@ -24,7 +24,6 @@ class Post(models.Model):
     """Создание модели постов с м2м связью с категорией"""
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50, null=True, blank=True)
-    # description = models.TextField()
     description = RichTextField('Text')
     language = models.CharField(max_length=2, choices=LANGUAGE_CHOICES)
     is_main = models.BooleanField(default=False)
@@ -47,19 +46,14 @@ class PostTag(models.Model):
 class PostImage(models.Model):
     """Создание модели картинок имеет связь с постом"""
     is_main = models.BooleanField(default=False)
-    image = models.URLField(max_length=255, blank=True)
+    image = models.ImageField(upload_to='post_images/')
     post_image = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='image_post', default='')
-
-    
 
 class PostVideo(models.Model):
     """Создание модели видео для постов"""
-    url = models.URLField(max_length=200)
+    video = models.FileField(upload_to='post_videos/', null=True, blank=True)
     post_video = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_video', default='')
 
-
-    def __str__(self):
-        return self.url
 
 class Comment(models.Model):
     """Создание модели коментариев имеет связь с Постом"""
@@ -73,14 +67,11 @@ class Comment(models.Model):
 
 class Video(models.Model):
     """Создание видео для главной страницы"""
-    url = models.URLField(max_length=200)
+    video = models.FileField(upload_to='videos_on_main_page/', null=True, blank=True)
 
-    def __str__(self):
-        return self.url
 
 class ImageAd(models.Model):
-    image_ad = models.URLField(max_length=255, blank=True)
-
+    image_ad = models.ImageField(upload_to='adv_images/', null=True, blank=True)
 
 
 

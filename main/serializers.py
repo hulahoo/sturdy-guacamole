@@ -14,8 +14,7 @@ class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         """Здесь мы определяем его поля"""
         model = Video
-        fields = ('url', )
-
+        fields = ('video', )
 
 class CategorySerializer(serializers.ModelSerializer):
     """Сериалайзер для категорий"""
@@ -35,7 +34,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = Post
-        fields = ('id', 'url', 'slug', 'title', 'description', 'category', 'language')
+        fields = ('id', 'url', 'slug', 'title', 'description', 'category', 'language', 'is_main')
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
@@ -63,7 +62,7 @@ class PostImageSerializer(serializers.ModelSerializer):
     class Meta:
         """Добавление модели и полей"""
         model = PostImage
-        fields = ('post', 'is_main', 'image')
+        fields = ('post_image', 'is_main', 'image')
 
 
 class PostTagSerializer(serializers.ModelSerializer):
@@ -79,13 +78,7 @@ class PostVideoSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей"""
         model = PostVideo
-        fields = ('url', )
-
-
-class PostImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = PostImage
-        fields = ('image', )
+        fields = ('video', )
 
 
 class PostDetailSerializer(serializers.ModelSerializer):
@@ -94,32 +87,21 @@ class PostDetailSerializer(serializers.ModelSerializer):
     class Meta:
         """Определение полей""" 
         model = Post
-        fields = ('id', 'url', 'slug', 'title', 'description', 'category', 'post_video', 'created', 'views', 'tags', 'language')
+        fields = ('id', 'url', 'slug', 'title', 'is_main', 'language', 'created', 'views', 'description', 'category', 'post_video')
         lookup_field = 'slug'
         extra_kwargs = {
             'url': {'lookup_field': 'slug'}
         }
 
-    # def _get_image_url(self, obj):
-    #     """Мы получаем url первой картинки"""
-    #     request = self.context.get('request')  # это у нас словарь и поэтому нужен метод get
-    #     image_obj = obj.image_post.first()  # если картинка есть то возвращает обьект
-    #     if image_obj is not None and image_obj.image:  # здесь мы проверяем если есть картинка то он вытаскивает url
-    #         url = image_obj.image.url
-    #         if request is not None:  # если request нам пришел не None
-    #             url = request.build_absolute_uri(url)  # то новое значение url будет абсолютным путем старого url
-    #         return url  # и возвращает путь
-    #     return "No Image"  # а если картинки нету то возвращает пустую строку
-
 
     def to_representation(self, instance):
         """формирует то что будет показываться пользователю он формирует словарь"""
         representation = super().to_representation(instance)  # здесь мы вызываем родительский метод
-        representation['category'] = CategorySerializer(instance.category.all(), many=True).data  # здесь мы выводим все категории, many=TRue для большого количества постов
-        representation['post_image'] = PostImageSerializer(instance.image_post.all(), many=True).data  # instance это обькет класса который мы прогоняем через serializer в нашем случаем это obj
-        representation['post_video'] = PostVideoSerializer(instance.post_video.all(), many=True).data
-        representation['post_tag'] = PostTagSerializer(instance.tags.all(), many=True).data
+        representation['category'] = CategorySerializer(instance.category.all(), many=True, context=self.context).data  # здесь мы выводим все категории, many=TRue для большого количества постов
+        representation['post_image'] = PostImageSerializer(instance.image_post.all(), many=True, context=self.context).data  # instance это обькет класса который мы прогоняем через serializer в нашем случаем это obj
+        representation['post_video'] = PostVideoSerializer(instance.post_video.all(), many=True, context=self.context).data
+        representation['post_tag'] = PostTagSerializer(instance.tags.all(), many=True, context=self.context).data
         print(instance.comment.all())
         if instance.comment is not None:
-            representation['comments'] = CommentSerializer(instance.comment.filter(is_true = True), many=True).data
+            representation['comments'] = CommentSerializer(instance.comment.filter(is_true = True), many=True, context=self.context).data
         return representation

@@ -7,6 +7,8 @@ from rest_framework.routers import DefaultRouter
 from main.views import PostViewSet, CategoryViewSet, CommentViewSet, PostVideoViewSet, VideoViewSet, PostTagViewSet, \
     ImageAdViewSet
 
+
+
 router = DefaultRouter()
 router.register('category', CategoryViewSet)
 router.register('posts', PostViewSet)
@@ -22,4 +24,8 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include(router.urls)),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
