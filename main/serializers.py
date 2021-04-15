@@ -101,7 +101,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
         representation['post_image'] = PostImageSerializer(instance.image_post.all(), many=True, context=self.context).data  # instance это обькет класса который мы прогоняем через serializer в нашем случаем это obj
         representation['post_video'] = PostVideoSerializer(instance.post_video.all(), many=True, context=self.context).data
         representation['post_tag'] = PostTagSerializer(instance.tags.all(), many=True, context=self.context).data
-        print(instance.comment.all())
         if instance.comment is not None:
             representation['comments'] = CommentSerializer(instance.comment.filter(is_true = True), many=True, context=self.context).data
         return representation

@@ -8,17 +8,18 @@ from main.models import Post, Category, Comment, PostVideo, Video, PostTag, Imag
 from main.search import CustomSearchFilter, CategorySearchFilter
 from main.serializers import PostDetailSerializer, CategorySerializer, CommentSerializer, PostVideoSerializer, \
     VideoSerializer, PostTagSerializer, ImageAdSerializer
-
+from main.filters import CategoryFilter, PostFilter
 
 class PostViewSet(ModelViewSet):
     """Создание предтставления"""
     queryset = Post.objects.all()
     serializer_class = PostDetailSerializer
     filter_backends = [DjangoFilterBackend, CustomSearchFilter]
-    filterset_fields = ['title', 'category', 'language']
+    # filterset_fields = ['title', 'category__title', 'language'] # do not use when using custom filterclass
     search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
     lookup_field = 'slug'
+    filter_class = PostFilter
 
     def retrieve(self, request, slug):
         if request.method == 'GET':
@@ -39,10 +40,11 @@ class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     filter_backends = [DjangoFilterBackend, CategorySearchFilter]
-    filterset_fields = ['title', 'language']
+    # filterset_fields = ['title', 'language'] # do not use when have 
     search_fields = ['title', ]
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly, ]
     lookup_field = 'slug'
+    filter_class = CategoryFilter # this
 
 
 class CommentViewSet(ModelViewSet):
